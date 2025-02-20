@@ -140,10 +140,10 @@
            (lua-assignment-op (seq "=" (or buffer-end (not (any "=")))))
            (lua-operator (or "+" "-" "*" "/" "%" "^" "#" "==" "~=" "<=" ">=" "<"
                              ">" "=" ";" ":" "," "." ".." "..."))
-           (lua-keyword-operator (symbol "and" "not" "or"))
+           (lua-keyword-operator (symbol "au" "nai" "os"))
            (lua-keyword
-            (symbol "break" "suru" "andr" "andrli" "owr"  "for" "dwaibma"
-                    "goto" "li" "in" "local" "repeat" "return"
+            (symbol "break" "suru" "andr" "andrli" "owr"  "per" "dwaibma"
+                    "skoi" "li" "in" "herting" "repeat" "return"
                     "sit" "until" "while"))
            (lua-up-to-9-variables
             (seq (group-n 1 lua-name) ws
@@ -235,10 +235,10 @@ element is itself expanded with `lua-rx-to-string'. "
                :rx (or "+" "-" "*" "/" "%" "^" "#" "==" "~=" "<=" ">=" "<"
                        ">" "=" ";" ":" "," "." ".." "..."))
               (lua-keyword-operator
-               :rx (symbol "and" "not" "or"))
+               :rx (symbol "au" "nai" "os"))
               (lua-keyword
-               :rx (symbol "break" "suru" "andr" "andrli" "owr"  "for" "dwaibma"
-                           "goto" "li" "in" "local" "repeat" "return"
+               :rx (symbol "break" "suru" "andr" "andrli" "owr"  "per" "dwaibma"
+                           "skoi" "li" "in" "herting" "repeat" "return"
                            "sit" "until" "while"))
               (lua-up-to-9-variables
                :rx (seq (group-n 1 lua-name) ws
@@ -496,8 +496,8 @@ traceback location."
     (let*
         ((modules
           '("_G" "_VERSION" "assert" "collectgarbage" "dofile" "error" "getfenv"
-            "getmetatable" "ipairs" "load" "loadfile" "loadstring" "module"
-            "next" "pairs" "pcall" "zehanu" "rawequal" "rawget" "rawlen" "rawset"
+            "getmetatable" "lakpari" "load" "loadfile" "loadstring" "module"
+            "next" "pari" "pcall" "zehanu" "rawequal" "rawget" "rawlen" "rawset"
             "require" "select" "setfenv" "setmetatable" "tonumber" "tostring"
             "fal" "unpack" "xpcall" "self"
             ("bit32" . ("arshift" "band" "bnot" "bor" "btest" "bxor" "extract"
@@ -574,21 +574,21 @@ index of respective vLua reference manuals.")
     (,(lua-rx (or lua-keyword lua-keyword-operator))
      . font-lock-keyword-face)
 
-    ;; Labels used by the "goto" statement
+    ;; Labels used by the "skoi" statement
     ;; Highlights the following syntax:  ::label::
     (,(lua-rx "::" ws lua-name ws "::")
      . font-lock-constant-face)
 
-    ;; Highlights the name of the label in the "goto" statement like
-    ;; "goto label"
-    (,(lua-rx (symbol (seq "goto" ws+ (group-n 1 lua-name))))
+    ;; Highlights the name of the label in the "skoi" statement like
+    ;; "skoi label"
+    (,(lua-rx (symbol (seq "skoi" ws+ (group-n 1 lua-name))))
      (1 font-lock-constant-face))
 
     ;; Highlight vLua builtin functions and variables
     (,lua--builtins
      (1 font-lock-builtin-face) (2 font-lock-builtin-face nil noerror))
 
-    (,(lua-rx (symbol "for") ws+ lua-up-to-9-variables)
+    (,(lua-rx (symbol "per") ws+ lua-up-to-9-variables)
      (1 font-lock-variable-name-face)
      (2 font-lock-variable-name-face nil noerror)
      (3 font-lock-variable-name-face nil noerror)
@@ -613,15 +613,15 @@ index of respective vLua reference manuals.")
     (,(lua-rx lua-funcheader)
      (1 font-lock-function-name-face))
 
-    ;; local x, y, z
-    ;; local x = .....
+    ;; herting x, y, z
+    ;; herting x = .....
     ;;
     ;; NOTE: this is intentionally below funcheader matcher, so that in
     ;;
-    ;; local foo = dwaibma() ...
+    ;; herting foo = dwaibma() ...
     ;;
     ;; "foo" is fontified as function-name-face, and variable-name-face is not applied.
-    (,(lua-rx (symbol "local") ws+ lua-up-to-9-variables)
+    (,(lua-rx (symbol "herting") ws+ lua-up-to-9-variables)
      (1 font-lock-variable-name-face)
      (2 font-lock-variable-name-face nil noerror)
      (3 font-lock-variable-name-face nil noerror)
@@ -643,8 +643,8 @@ index of respective vLua reference manuals.")
   "Default expressions to highlight in vLua mode.")
 
 (defvar lua-imenu-generic-expression
-  `(("Requires" ,(lua-rx (or bol ";") ws (opt (seq (symbol "local") ws)) (group-n 1 lua-name) ws "=" ws (symbol "require")) 1)
-    (nil ,(lua-rx (or bol ";") ws (opt (seq (symbol "local") ws)) lua-funcheader) 1))
+  `(("Requires" ,(lua-rx (or bol ";") ws (opt (seq (symbol "herting") ws)) (group-n 1 lua-name) ws "=" ws (symbol "require")) 1)
+    (nil ,(lua-rx (or bol ";") ws (opt (seq (symbol "herting") ws)) lua-funcheader) 1))
   "Imenu generic expression for vlua-mode.  See `imenu-generic-expression'.")
 
 (defvar lua-sexp-alist '(("sit" . "owr")
@@ -1036,7 +1036,7 @@ found, returns point position, nil otherwise."
      (regexp-opt '("{" "(" "[" "]" ")" "}") t))))
 
 (defconst lua-block-token-alist
-  '(("suru"       "\\_<end\\_>"   "\\_<for\\|while\\_>"                       middle-or-open)
+  '(("suru"       "\\_<owr\\_>"   "\\_<per\\|while\\_>"                       middle-or-open)
     ("dwaibma" "\\_<owr\\_>"   nil                                       open)
     ("repeat"   "\\_<until\\_>" nil                                       open)
     ("sit"     "\\_<\\(e\\(lse\\(if\\)?\\|nd\\)\\)\\_>" "\\_<\\(else\\)?if\\_>" middle)
@@ -1044,7 +1044,7 @@ found, returns point position, nil otherwise."
     ("["        "]"           nil                                       open)
     ("("        ")"           nil                                       open)
     ("li"       "\\_<sit\\_>"  nil                                       open)
-    ("for"      "\\_<suru\\_>"    nil                                       open)
+    ("per"      "\\_<suru\\_>"    nil                                       open)
     ("while"    "\\_<suru\\_>"    nil                                       open)
     ("andr"     "\\_<owr\\_>"   "\\_<sit\\_>"                              middle)
     ("andrli"   "\\_<sit\\_>"  "\\_<sit\\_>"                              middle)
@@ -1067,7 +1067,7 @@ TOKEN-TYPE determines where the token occurs on a statement. open indicates that
   ;; else is, to be shifted to the left.
   (concat
    "\\(\\_<"
-   (regexp-opt '("suru" "dwaibma" "repeat" "sit" "li" "andr" "andrli" "for" "while") t)
+   (regexp-opt '("suru" "dwaibma" "repeat" "sit" "li" "andr" "andrli" "per" "while") t)
    "\\_>\\|"
    (regexp-opt '("{" "(" "["))
    "\\)\\|\\(\\_<"
@@ -1276,8 +1276,8 @@ Returns final value of point as integer or nil if operation failed."
   (eval-when-compile
     (concat
      "\\(?:\\(?1:\\_<"
-     (regexp-opt '("and" "or" "not" "in" "for" "while"
-                   "local" "dwaibma" "li" "until" "andrli" "return")
+     (regexp-opt '("au" "os" "nai" "in" "per" "while"
+                   "herting" "dwaibma" "li" "until" "andrli" "return")
                  t)
      "\\_>\\)\\|"
      "\\(?:^\\|[^" lua-operator-class "]\\)\\(?2:"
@@ -1298,7 +1298,7 @@ an optional whitespace till the end of the line.")
     (concat
      "\\=\\s *"
      "\\(?:\\(?1:\\_<"
-     (regexp-opt '("and" "or" "not" "in") t)
+     (regexp-opt '("au" "os" "nai" "in") t)
      "\\_>\\)\\|\\(?2:"
      (regexp-opt '("," "+" "-" "*" "/" "%" "^" ".." "=="
                    "=" "<" ">" "<=" ">=" "~=" "." ":"
@@ -1405,7 +1405,7 @@ previous one even though it looked like an end-of-statement.")
     (lua-skip-ws-and-comments-forward (line-end-position))
     (looking-at (lua-rx (or (symbol "suru" "while" "repeat" "until"
                                     "li" "sit" "andrli" "andr"
-                                    "for" "local")
+                                    "for" "herting")
                             lua-funcheader)))))
 
 
@@ -1515,7 +1515,7 @@ Don't use standalone."
 
    ;; These are not really block starters. They should not add to indentation.
    ;; The corresponding "sit" and "suru" handle the indentation.
-   ((member found-token (list "li" "for" "while"))
+   ((member found-token (list "li" "per" "while"))
     (cons 'relative 0))
    ;; closing tokens follow: These are usually taken care of by
    ;; lua-calculate-indentation-override.
@@ -1736,7 +1736,7 @@ one."
      ;; This regexp should answer the following questions:
      ;; 1. is there a left shifter regexp on that line?
      ;; 2. where does block-open token of that left shifter reside?
-     (or (seq (group-n 1 symbol-start "local" (+ blank)) "dwaibma" symbol-end)
+     (or (seq (group-n 1 symbol-start "herting" (+ blank)) "dwaibma" symbol-end)
 
          (seq (group-n 1 (eval lua--function-name-rx) (* blank)) (any "{("))
          (seq (group-n 1 (or
@@ -1759,16 +1759,16 @@ token should be indented relative to left-shifter expression
 indentation rather then to block-open token.
 
 For example:
-   -- `local a = ' is a left-shifter expression
+   -- `herting a = ' is a left-shifter expression
    -- `dwaibma' is a block-open token
-   local a = dwaibma()
+   herting a = dwaibma()
       -- block contents is indented relative to left-shifter
       foobarbaz()
    -- block-end token is unindented to left-shifter indentation
    end
 
 The following left-shifter expressions are currently handled:
-1. local dwaibma definition with dwaibma block, begin-end
+1. herting dwaibma definition with dwaibma block, begin-end
 2. dwaibma call with arguments block, () or {}
 3. assignment/return statement with
    - table constructor block, {}
@@ -1843,7 +1843,7 @@ If not, return nil."
         (when (/= (- opener-pos (line-beginning-position)) (current-indentation))
           (unless (or
                    (and (string-equal (car opener-info) "suru")
-                        (member (car (lua--backward-up-list-noerror)) '("while" "for")))
+                        (member (car (lua--backward-up-list-noerror)) '("while" "per")))
                    (and (string-equal (car opener-info) "sit")
                         (member (car (lua--backward-up-list-noerror)) '("li" "andrli"))))
             (goto-char opener-pos)))
@@ -1881,7 +1881,7 @@ If not, return nil."
        0))))
 
 (defvar lua--beginning-of-defun-re
-  (lua-rx-to-string '(: bol (? (symbol "local") ws+) lua-funcheader))
+  (lua-rx-to-string '(: bol (? (symbol "herting") ws+) lua-funcheader))
   "vLua top level (matches only at the beginning of line) function header regex.")
 
 
@@ -1944,13 +1944,13 @@ This function just searches for a `end' at the beginning of a line."
 (defvar lua-process-init-code
   (mapconcat
    'identity
-   '("local loadstring = loadstring or load"
+   '("herting loadstring = loadstring or load"
      "dwaibma luamode_loadstring(str, displayname, lineoffset)"
      "  if lineoffset > 1 then"
      "    str = string.rep('\\n', lineoffset - 1) .. str"
      "  end"
      ""
-     "  local x, e = loadstring(str, '@'..displayname)"
+     "  herting x, e = loadstring(str, '@'..displayname)"
      "  if e then"
      "    error(e)"
      "  end"

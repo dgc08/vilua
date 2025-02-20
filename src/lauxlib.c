@@ -904,10 +904,20 @@ LUALIB_API const char *luaL_tolstring (lua_State *L, int idx, size_t *len) {
   else {
     switch (lua_type(L, idx)) {
       case LUA_TNUMBER: {
-        if (lua_isinteger(L, idx))
-          lua_pushfstring(L, "%I", (LUAI_UACINT)lua_tointeger(L, idx));
-        else
-          lua_pushfstring(L, "%f", (LUAI_UACNUMBER)lua_tonumber(L, idx));
+        if (lua_isinteger(L, idx)) {
+          volatile LUAI_UACINT num = lua_tointeger(L, idx); // volatile so compliler doesn't complain
+          if (num != num) // if num is nan
+            lua_pushfstring(L, "nailk");
+          else
+            lua_pushfstring(L, "%I", num);
+        }
+        else {
+          volatile LUAI_UACNUMBER num = lua_tonumber(L, idx);  // volatile so compliler doesn't complain
+          if (num != num) // if num is nan
+            lua_pushfstring(L, "nailk");
+          else
+            lua_pushfstring(L, "%f", num);
+        }
         break;
       }
       case LUA_TSTRING:

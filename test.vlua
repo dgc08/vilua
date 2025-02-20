@@ -1,7 +1,17 @@
+fras = {}
+
+per k, v in pari(viktiko_tumam) suru
+   tumam.insert(fras, k .. " = " .. v)
+owr
+
+zehanu(tumam.concat(fras, ", "))
+
+zehanu (_VERSION)
+
 suru
-    local y = 1
-    zehanu(y)
-    x = {0,1,2,3,4}
+   herting y = 1
+   zehanu(y)
+   x = {0,1,2,3,4}
 owr
 
 
@@ -9,11 +19,11 @@ x.ringo = 69
 zehanu(x["ringo"])
 zehanu(x[2])
 
-dwaibma viktidw(a)
-     zehanu ("iskatazma")
+dwaibma ein_dw(a)
+   zehanu ("iskatazma")
 owr
 
-zehanu("viktidw je " .. fal(viktidw))
+zehanu("ein_dw je " .. fal(ein_dw))
 zehanu("x je " .. fal(x))
 
 ting = uso
@@ -21,10 +31,12 @@ ting = uso
 zehanu ("Ting:", ting)
 
 li ting sit
-    zehanu("ting ine li-fras pravda ne")
+   zehanu("ting ine li-fras pravda ne")
+andrli uso sit
+   zehanu("to niltid slutcha grun un kakudan 'andrli uso'")
 andr
-    zehanu("ting ine li-fras uso ne")
+   zehanu("ting ine li-fras uso ne")
 owr
 
 zehanu()
-zehanu(tumam.concat({"jaa", "velt", "vlua"}, " - "))
+zehanu(tumam.concat({"jaa", "velt", "kfjhgkjhfdkjdgh"}, " - "))

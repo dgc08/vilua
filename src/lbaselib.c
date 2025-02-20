@@ -20,8 +20,6 @@
 #include "lauxlib.h"
 #include "lualib.h"
 
-#define VIKORD "https://discord.gg/viossa"
-
 static int luaB_print (lua_State *L) {
   int n = lua_gettop(L);  /* number of arguments */
   int i;
@@ -36,15 +34,6 @@ static int luaB_print (lua_State *L) {
   lua_writeline();
   return 0;
 }
-
-static int luaB_print_vikord_link (lua_State *L) {
-  lua_writestring(VIKORD, strlen(VIKORD));  /* print it */
-  system("xdg-open "VIKORD);
-  lua_pop(L, 1);  /* pop result */
-  lua_writeline();
-  return 0;
-}
-
 
 /*
 ** Creates a warning with all given arguments.
@@ -518,14 +507,13 @@ static const luaL_Reg base_funcs[] = {
   {"dofile", luaB_dofile},
   {"error", luaB_error},
   {"getmetatable", luaB_getmetatable},
-  {"ipairs", luaB_ipairs},
+  {"lakpari", luaB_ipairs},
   {"loadfile", luaB_loadfile},
   {"load", luaB_load},
   {"next", luaB_next},
-  {"pairs", luaB_pairs},
+  {"pari", luaB_pairs},
   {"bruk", luaB_pcall},
   {"zehanu", luaB_print},
-  {"vikord", luaB_print_vikord_link},
   {"warn", luaB_warn},
   {"rawequal", luaB_rawequal},
   {"atai", luaB_rawlen},
@@ -554,6 +542,32 @@ LUAMOD_API int luaopen_base (lua_State *L) {
   /* set global _VERSION */
   lua_pushliteral(L, LUA_VERSION);
   lua_setfield(L, -2, "_VERSION");
+  /* Set 4 viktiko */
+  lua_newtable(L);  // Create a new table
+
+  lua_pushstring(L, "akk");
+  lua_pushstring(L, "yes");
+  lua_settable(L, -3);
+
+  lua_pushstring(L, "nai");
+  lua_pushstring(L, "no");
+  lua_settable(L, -3);
+
+  lua_pushstring(L, "fshto");
+  lua_pushstring(L, "understand");
+  lua_settable(L, -3);
+
+  lua_pushstring(L, "ka");
+  lua_pushstring(L, "what");
+  lua_settable(L, -3);
+
+  lua_setfield(L, -2, "viktiko_tumam");
+  /* set 4 viktiko fras */
+  lua_pushstring(L, "fshto = understand, nai = no, akk = yes, ka = what");
+  lua_setfield(L, -2, "viktiko");
+  /* set vikord */
+  lua_pushstring(L, "https://discord.gg/viossa");
+  lua_setfield(L, -2, "vikord");
   return 1;
 }
 

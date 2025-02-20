@@ -38,9 +38,9 @@
 // kjannosplas
 /* ORDER RESERVED */
 static const char *const luaX_tokens [] = {
-    "and", "break", "suru", "andr", "andrli",
-    "owr", "uso", "for", "dwaibma", "goto", "li",
-    "in", "local", "nil", "not", "or", "repeat",
+    "au", "break", "suru", "andr", "andrli",
+    "owr", "uso", "per", "dwaibma", "skoi", "li",
+    "in", "herting", "nil", "nai", "os", "repeat",
     "return", "sit", "pravda", "until", "while",
     "//", "..", "...", "==", ">=", "<=", "~=",
     "<<", ">>", "::", "<eof>",

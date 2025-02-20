@@ -761,7 +761,7 @@ static const luaL_Reg iolib[] = {
   {"popen", io_popen},
   {"read", io_read},
   {"tmpfile", io_tmpfile},
-  {"fal", io_type},
+  {"type", io_type},
   {"write", io_write},
   {NULL, NULL}
 };
