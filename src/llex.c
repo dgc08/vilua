@@ -35,7 +35,7 @@
 
 #define currIsNewline(ls)	(ls->current == '\n' || ls->current == '\r')
 
-// kjereplas
+// kjannosplas
 /* ORDER RESERVED */
 static const char *const luaX_tokens [] = {
     "and", "break", "suru", "andr", "andrli",
@@ -285,7 +285,7 @@ static void read_long_string (LexState *ls, SemInfo *seminfo, size_t sep) {
   for (;;) {
     switch (ls->current) {
       case EOZ: {  /* error */
-        const char *what = (seminfo ? "string" : "comment");
+        const char *what = (seminfo ? "fras" : "comment");
         const char *msg = luaO_pushfstring(ls->L,
                      "unfinished long %s (starting at line %d)", what, line);
         lexerror(ls, msg, TK_EOS);

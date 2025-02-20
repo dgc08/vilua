@@ -20,7 +20,7 @@ LUAMOD_API int (luaopen_base) (lua_State *L);
 #define LUA_COLIBNAME	"coroutine"
 LUAMOD_API int (luaopen_coroutine) (lua_State *L);
 
-#define LUA_TABLIBNAME	"table"
+#define LUA_TABLIBNAME	"tumam"
 LUAMOD_API int (luaopen_table) (lua_State *L);
 
 #define LUA_IOLIBNAME	"io"

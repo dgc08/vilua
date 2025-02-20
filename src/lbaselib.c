@@ -20,6 +20,7 @@
 #include "lauxlib.h"
 #include "lualib.h"
 
+#define VIKORD "https://discord.gg/viossa"
 
 static int luaB_print (lua_State *L) {
   int n = lua_gettop(L);  /* number of arguments */
@@ -32,6 +33,14 @@ static int luaB_print (lua_State *L) {
     lua_writestring(s, l);  /* print it */
     lua_pop(L, 1);  /* pop result */
   }
+  lua_writeline();
+  return 0;
+}
+
+static int luaB_print_vikord_link (lua_State *L) {
+  lua_writestring(VIKORD, strlen(VIKORD));  /* print it */
+  system("xdg-open "VIKORD);
+  lua_pop(L, 1);  /* pop result */
   lua_writeline();
   return 0;
 }
@@ -502,7 +511,7 @@ static int luaB_tostring (lua_State *L) {
   return 1;
 }
 
-// kjereplas
+// kjannosplas
 static const luaL_Reg base_funcs[] = {
   {"assert", luaB_assert},
   {"collectgarbage", luaB_collectgarbage},
@@ -514,17 +523,18 @@ static const luaL_Reg base_funcs[] = {
   {"load", luaB_load},
   {"next", luaB_next},
   {"pairs", luaB_pairs},
-  {"pcall", luaB_pcall},
+  {"bruk", luaB_pcall},
   {"zehanu", luaB_print},
+  {"vikord", luaB_print_vikord_link},
   {"warn", luaB_warn},
   {"rawequal", luaB_rawequal},
-  {"rawlen", luaB_rawlen},
+  {"atai", luaB_rawlen},
   {"rawget", luaB_rawget},
   {"rawset", luaB_rawset},
   {"select", luaB_select},
   {"setmetatable", luaB_setmetatable},
-  {"tonumber", luaB_tonumber},
-  {"tostring", luaB_tostring},
+  {"adlaksu", luaB_tonumber},
+  {"adfras", luaB_tostring},
   {"fal", luaB_type},
   {"xpcall", luaB_xpcall},
   /* placeholders */
