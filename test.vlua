@@ -1,5 +1,7 @@
 fras = {}
 
+iskat(1 == 1, "deki se afto li 1 nai sama 1")
+
 per k, v in pari(viktiko_tumam) suru
    tumam.insert(fras, k .. " = " .. v)
 owr
@@ -26,7 +28,8 @@ owr
 zehanu("ein_dw je " .. fal(ein_dw))
 zehanu("x je " .. fal(x))
 
-ting = uso
+--ting = uso os pravda
+ting = uso au pravda
 
 zehanu ("Ting:", ting)
 
@@ -40,3 +43,11 @@ owr
 
 zehanu()
 zehanu(tumam.concat({"jaa", "velt", "kfjhgkjhfdkjdgh"}, " - "))
+
+-- -- iskat per "skoi" zerjet kara
+
+-- per x=1,5 suru ::redo::
+--   zehanu(x .. ' + 1 = ?')
+--   herting y = adlaksu(io.read'*l')
+--   li y ~= x + 1 sit skoi redo owr
+-- owr

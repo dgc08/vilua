@@ -495,7 +495,7 @@ traceback location."
     lua--builtins
     (let*
         ((modules
-          '("_G" "_VERSION" "assert" "collectgarbage" "dofile" "error" "getfenv"
+          '("_G" "_VERSION" "iskat" "collectgarbage" "dofile" "error" "getfenv"
             "getmetatable" "lakpari" "load" "loadfile" "loadstring" "module"
             "next" "pari" "pcall" "zehanu" "rawequal" "rawget" "rawlen" "rawset"
             "require" "select" "setfenv" "setmetatable" "tonumber" "tostring"

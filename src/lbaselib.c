@@ -502,7 +502,7 @@ static int luaB_tostring (lua_State *L) {
 
 // kjannosplas
 static const luaL_Reg base_funcs[] = {
-  {"assert", luaB_assert},
+  {"iskat", luaB_assert},
   {"collectgarbage", luaB_collectgarbage},
   {"dofile", luaB_dofile},
   {"error", luaB_error},
@@ -521,7 +521,7 @@ static const luaL_Reg base_funcs[] = {
   {"rawset", luaB_rawset},
   {"select", luaB_select},
   {"setmetatable", luaB_setmetatable},
-  {"adlaksu", luaB_tonumber},
+  {"adlasku", luaB_tonumber},
   {"adfras", luaB_tostring},
   {"fal", luaB_type},
   {"xpcall", luaB_xpcall},

@@ -41,10 +41,10 @@ static const char *const luaX_tokens [] = {
     "au", "break", "suru", "andr", "andrli",
     "owr", "uso", "per", "dwaibma", "skoi", "li",
     "in", "herting", "nil", "nai", "os", "repeat",
-    "return", "sit", "pravda", "until", "while",
+    "anta", "sit", "pravda", "until", "while",
     "//", "..", "...", "==", ">=", "<=", "~=",
     "<<", ">>", "::", "<eof>",
-    "<number>", "<integer>", "<name>", "<string>"
+    "<lasku>", "<lakxel>", "<namae>", "<fras>"
 };
 
 

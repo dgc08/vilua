@@ -30,7 +30,7 @@ static const char udatatypename[] = "userdata";
 // kjannosplas (complete)
 LUAI_DDEF const char *const luaT_typenames_[LUA_TOTALTYPES] = {
   "no value",
-  "nil", "pravdazma", udatatypename, "laksu",
+  "nil", "pravdazma", udatatypename, "lasku",
   "fras", "tumam", "dwaibma", udatatypename, "thread",
   "upvalue", "proto" /* these last cases are used for tests only */
 };
