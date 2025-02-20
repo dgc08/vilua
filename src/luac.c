@@ -300,10 +300,10 @@ static void PrintConstant(const Proto* f, int i)
 	printf("nil");
 	break;
   case LUA_VFALSE:
-	printf("false");
+	printf("uso");
 	break;
   case LUA_VTRUE:
-	printf("true");
+	printf("pravda");
 	break;
   case LUA_VNUMFLT:
 	{
@@ -675,7 +675,7 @@ static void PrintHeader(const Proto* f)
  else
   s="(string)";
  printf("\n%s <%s:%d,%d> (%d instruction%s at %p)\n",
-	(f->linedefined==0)?"main":"function",s,
+	(f->linedefined==0)?"main":"dwaibma",s,
 	f->linedefined,f->lastlinedefined,
 	S(f->sizecode),VOID(f));
  printf("%d%s param%s, %d slot%s, %d upvalue%s, ",

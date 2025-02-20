@@ -702,7 +702,7 @@ static int f_write (lua_State *L) {
 
 static int f_seek (lua_State *L) {
   static const int mode[] = {SEEK_SET, SEEK_CUR, SEEK_END};
-  static const char *const modenames[] = {"set", "cur", "end", NULL};
+  static const char *const modenames[] = {"set", "cur", "owr", NULL};
   FILE *f = tofile(L);
   int op = luaL_checkoption(L, 2, "cur", modenames);
   lua_Integer p3 = luaL_optinteger(L, 3, 0);
@@ -761,7 +761,7 @@ static const luaL_Reg iolib[] = {
   {"popen", io_popen},
   {"read", io_read},
   {"tmpfile", io_tmpfile},
-  {"type", io_type},
+  {"fal", io_type},
   {"write", io_write},
   {NULL, NULL}
 };

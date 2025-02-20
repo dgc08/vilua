@@ -35,13 +35,13 @@
 
 #define currIsNewline(ls)	(ls->current == '\n' || ls->current == '\r')
 
-
+// kjereplas
 /* ORDER RESERVED */
 static const char *const luaX_tokens [] = {
-    "and", "break", "do", "else", "elseif",
-    "end", "false", "for", "function", "goto", "if",
+    "and", "break", "suru", "andr", "andrli",
+    "owr", "uso", "for", "dwaibma", "goto", "li",
     "in", "local", "nil", "not", "or", "repeat",
-    "return", "then", "true", "until", "while",
+    "return", "sit", "pravda", "until", "while",
     "//", "..", "...", "==", ">=", "<=", "~=",
     "<<", ">>", "::", "<eof>",
     "<number>", "<integer>", "<name>", "<string>"

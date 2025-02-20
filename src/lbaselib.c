@@ -502,7 +502,7 @@ static int luaB_tostring (lua_State *L) {
   return 1;
 }
 
-
+// kjereplas
 static const luaL_Reg base_funcs[] = {
   {"assert", luaB_assert},
   {"collectgarbage", luaB_collectgarbage},
@@ -515,7 +515,7 @@ static const luaL_Reg base_funcs[] = {
   {"next", luaB_next},
   {"pairs", luaB_pairs},
   {"pcall", luaB_pcall},
-  {"print", luaB_print},
+  {"zehanu", luaB_print},
   {"warn", luaB_warn},
   {"rawequal", luaB_rawequal},
   {"rawlen", luaB_rawlen},
@@ -525,7 +525,7 @@ static const luaL_Reg base_funcs[] = {
   {"setmetatable", luaB_setmetatable},
   {"tonumber", luaB_tonumber},
   {"tostring", luaB_tostring},
-  {"type", luaB_type},
+  {"fal", luaB_type},
   {"xpcall", luaB_xpcall},
   /* placeholders */
   {LUA_GNAME, NULL},

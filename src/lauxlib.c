@@ -914,7 +914,7 @@ LUALIB_API const char *luaL_tolstring (lua_State *L, int idx, size_t *len) {
         lua_pushvalue(L, idx);
         break;
       case LUA_TBOOLEAN:
-        lua_pushstring(L, (lua_toboolean(L, idx) ? "true" : "false"));
+        lua_pushstring(L, (lua_toboolean(L, idx) ? "pravda" : "uso"));
         break;
       case LUA_TNIL:
         lua_pushliteral(L, "nil");
