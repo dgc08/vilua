@@ -740,7 +740,7 @@ static const luaL_Reg mathlib[] = {
   {"sin",   math_sin},
   {"sqrt",  math_sqrt},
   {"tan",   math_tan},
-  {"fal", math_type},
+  {"type", math_type},
 #if defined(LUA_COMPAT_MATHLIB)
   {"atan2", math_atan},
   {"cosh",   math_cosh},
