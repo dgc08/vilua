@@ -143,8 +143,8 @@
            (lua-keyword-operator (symbol "au" "nai" "os"))
            (lua-keyword
             (symbol "break" "suru" "andr" "andrli" "owr"  "per" "dwaibma"
-                    "skoi" "li" "in" "herting" "repeat" "return"
-                    "sit" "until" "while"))
+                    "skoi" "li" "in" "herting" "gensuru" "anta"
+                    "sit" "made" "while"))
            (lua-up-to-9-variables
             (seq (group-n 1 lua-name) ws
                  (? "," ws (group-n 2 lua-name) ws
@@ -238,8 +238,8 @@ element is itself expanded with `lua-rx-to-string'. "
                :rx (symbol "au" "nai" "os"))
               (lua-keyword
                :rx (symbol "break" "suru" "andr" "andrli" "owr"  "per" "dwaibma"
-                           "skoi" "li" "in" "herting" "repeat" "return"
-                           "sit" "until" "while"))
+                           "skoi" "li" "in" "herting" "gensuru" "anta"
+                           "sit" "made" "while"))
               (lua-up-to-9-variables
                :rx (seq (group-n 1 lua-name) ws
                         (? "," ws (group-n 2 lua-name) ws
@@ -650,7 +650,7 @@ index of respective vLua reference manuals.")
 (defvar lua-sexp-alist '(("sit" . "owr")
                          ("dwaibma" . "owr")
                          ("suru" . "owr")
-                         ("repeat" . "until")))
+                         ("gensuru" . "made")))
 
 (defvar vlua-mode-abbrev-table nil
   "Abbreviation table used in vlua-mode buffers.")
@@ -1030,15 +1030,15 @@ found, returns point position, nil otherwise."
   (eval-when-compile
     (concat
      "\\(\\_<"
-     (regexp-opt '("suru" "dwaibma" "repeat" "sit"
-                   "andr" "andrli" "owr" "until") t)
+     (regexp-opt '("suru" "dwaibma" "gensuru" "sit"
+                   "andr" "andrli" "owr" "made") t)
      "\\_>\\)\\|"
      (regexp-opt '("{" "(" "[" "]" ")" "}") t))))
 
 (defconst lua-block-token-alist
   '(("suru"       "\\_<owr\\_>"   "\\_<per\\|while\\_>"                       middle-or-open)
     ("dwaibma" "\\_<owr\\_>"   nil                                       open)
-    ("repeat"   "\\_<until\\_>" nil                                       open)
+    ("gensuru"   "\\_<until\\_>" nil                                       open)
     ("sit"     "\\_<\\(e\\(lse\\(if\\)?\\|nd\\)\\)\\_>" "\\_<\\(else\\)?if\\_>" middle)
     ("{"        "}"           nil                                       open)
     ("["        "]"           nil                                       open)
@@ -1049,7 +1049,7 @@ found, returns point position, nil otherwise."
     ("andr"     "\\_<owr\\_>"   "\\_<sit\\_>"                              middle)
     ("andrli"   "\\_<sit\\_>"  "\\_<sit\\_>"                              middle)
     ("owr"      nil           "\\_<\\(suru\\|dwaibma\\|sit\\|else\\)\\_>" close)
-    ("until"    nil           "\\_<repeat\\_>"                            close)
+    ("made"    nil           "\\_<repeat\\_>"                            close)
     ("}"        nil           "{"                                       close)
     ("]"        nil           "\\["                                     close)
     (")"        nil           "("                                       close))
@@ -1067,11 +1067,11 @@ TOKEN-TYPE determines where the token occurs on a statement. open indicates that
   ;; else is, to be shifted to the left.
   (concat
    "\\(\\_<"
-   (regexp-opt '("suru" "dwaibma" "repeat" "sit" "li" "andr" "andrli" "per" "while") t)
+   (regexp-opt '("suru" "dwaibma" "gensuru" "sit" "li" "andr" "andrli" "per" "while") t)
    "\\_>\\|"
    (regexp-opt '("{" "(" "["))
    "\\)\\|\\(\\_<"
-   (regexp-opt '("owr" "until") t)
+   (regexp-opt '("owr" "made") t)
    "\\_>\\|"
    (regexp-opt '("]" ")" "}"))
    "\\)")
@@ -1277,7 +1277,7 @@ Returns final value of point as integer or nil if operation failed."
     (concat
      "\\(?:\\(?1:\\_<"
      (regexp-opt '("au" "os" "nai" "in" "per" "while"
-                   "herting" "dwaibma" "li" "until" "andrli" "return")
+                   "herting" "dwaibma" "li" "made" "andrli" "anta")
                  t)
      "\\_>\\)\\|"
      "\\(?:^\\|[^" lua-operator-class "]\\)\\(?2:"
@@ -1324,8 +1324,8 @@ previous one even though it looked like an end-of-statement.")
                               (or (match-beginning 1)
                                   (match-beginning 2))))
       (if (and return-value
-               (string-equal (match-string-no-properties 0) "return"))
-          ;; "return" keyword is ambiguous and depends on next token
+               (string-equal (match-string-no-properties 0) "anta"))
+          ;; "anta" keyword is ambiguous and depends on next token
           (unless (save-excursion
                     (goto-char (match-end 0))
                     (forward-comment (point-max))
@@ -1403,7 +1403,7 @@ previous one even though it looked like an end-of-statement.")
   "Return non-nil if looking at token(-s) that forbid continued line."
   (save-excursion
     (lua-skip-ws-and-comments-forward (line-end-position))
-    (looking-at (lua-rx (or (symbol "suru" "while" "repeat" "until"
+    (looking-at (lua-rx (or (symbol "suru" "while" "gensuru" "made"
                                     "li" "sit" "andrli" "andr"
                                     "for" "herting")
                             lua-funcheader)))))
@@ -1521,7 +1521,7 @@ Don't use standalone."
    ;; lua-calculate-indentation-override.
    ;; elseif is a bit of a hack. It is not handled separately, but it needs to
    ;; nullify a previous then if on the same line.
-   ((member found-token (list "until" "andrli"))
+   ((member found-token (list "made" "andrli"))
     (save-excursion
       (let* ((line-beginning (line-beginning-position))
              (same-line (and (lua-goto-matching-block-token found-pos 'backward)
@@ -1743,7 +1743,7 @@ one."
                           ;; assignment statement prefix
                           (seq (* nonl) (not (any "<=>~")) "=" (* blank))
                           ;; return statement prefix
-                          (seq word-start "return" word-end (* blank))))
+                          (seq word-start "anta" word-end (* blank))))
               ;; right hand side
               (or "{"
                   "dwaibma"

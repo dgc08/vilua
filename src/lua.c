@@ -515,7 +515,7 @@ static int pushline (lua_State *L, int firstline) {
   if (l > 0 && b[l-1] == '\n')  /* line ends with newline? */
     b[--l] = '\0';  /* remove it */
   if (firstline && b[0] == '=')  /* for compatibility with 5.2, ... */
-    lua_pushfstring(L, "return %s", b + 1);  /* change '=' to 'return' */
+    lua_pushfstring(L, "anta %s", b + 1);  /* change '=' to 'return' */
   else
     lua_pushlstring(L, b, l);
   lua_freeline(L, b);
@@ -529,7 +529,7 @@ static int pushline (lua_State *L, int firstline) {
 */
 static int addreturn (lua_State *L) {
   const char *line = lua_tostring(L, -1);  /* original line */
-  const char *retline = lua_pushfstring(L, "return %s;", line);
+  const char *retline = lua_pushfstring(L, "anta %s;", line);
   int status = luaL_loadbuffer(L, retline, strlen(retline), "=stdin");
   if (status == LUA_OK) {
     lua_remove(L, -2);  /* remove modified line */

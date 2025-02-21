@@ -97,18 +97,18 @@ static int pushglobalfuncname (lua_State *L, lua_Debug *ar) {
   }
 }
 
-
+// kjannosplas
 static void pushfuncname (lua_State *L, lua_Debug *ar) {
   if (pushglobalfuncname(L, ar)) {  /* try first a global name */
-    lua_pushfstring(L, "function '%s'", lua_tostring(L, -1));
+    lua_pushfstring(L, "dwaibma '%s'", lua_tostring(L, -1));
     lua_remove(L, -2);  /* remove name */
   }
   else if (*ar->namewhat != '\0')  /* is there a name from code? */
     lua_pushfstring(L, "%s '%s'", ar->namewhat, ar->name);  /* use it */
   else if (*ar->what == 'm')  /* main? */
-      lua_pushliteral(L, "main chunk");
+      lua_pushliteral(L, "stuur tel");
   else if (*ar->what != 'C')  /* for Lua functions, use <file:line> */
-    lua_pushfstring(L, "function <%s:%d>", ar->short_src, ar->linedefined);
+    lua_pushfstring(L, "dwaibma <%s:%d>", ar->short_src, ar->linedefined);
   else  /* nothing left... */
     lua_pushliteral(L, "?");
 }
@@ -140,7 +140,7 @@ LUALIB_API void luaL_traceback (lua_State *L, lua_State *L1,
     luaL_addstring(&b, msg);
     luaL_addchar(&b, '\n');
   }
-  luaL_addstring(&b, "stack traceback:");
+  luaL_addstring(&b, "surukazma:");
   while (lua_getstack(L1, level++, &ar)) {
     if (limit2show-- == 0) {  /* too many levels? */
       int n = last - level - LEVELS2 + 1;  /* number of levels to skip */
@@ -176,17 +176,17 @@ LUALIB_API void luaL_traceback (lua_State *L, lua_State *L1,
 LUALIB_API int luaL_argerror (lua_State *L, int arg, const char *extramsg) {
   lua_Debug ar;
   if (!lua_getstack(L, 0, &ar))  /* no stack frame? */
-    return luaL_error(L, "bad argument #%d (%s)", arg, extramsg);
+    return luaL_error(L, "warui argument #%d (%s)", arg, extramsg);
   lua_getinfo(L, "n", &ar);
   if (strcmp(ar.namewhat, "method") == 0) {
     arg--;  /* do not count 'self' */
     if (arg == 0)  /* error is in the self argument itself? */
-      return luaL_error(L, "calling '%s' on bad self (%s)",
+      return luaL_error(L, "bruk '%s' na warui sebja (%s)",
                            ar.name, extramsg);
   }
   if (ar.name == NULL)
     ar.name = (pushglobalfuncname(L, &ar)) ? lua_tostring(L, -1) : "?";
-  return luaL_error(L, "bad argument #%d to '%s' (%s)",
+  return luaL_error(L, "warui argument #%d to '%s' (%s)",
                         arg, ar.name, extramsg);
 }
 
@@ -200,7 +200,7 @@ LUALIB_API int luaL_typeerror (lua_State *L, int arg, const char *tname) {
     typearg = "light userdata";  /* special name for messages */
   else
     typearg = luaL_typename(L, arg);  /* standard name */
-  msg = lua_pushfstring(L, "%s expected, got %s", tname, typearg);
+  msg = lua_pushfstring(L, "treng %s, men sada %s", tname, typearg);
   return luaL_argerror(L, arg, msg);
 }
 
@@ -436,7 +436,7 @@ LUALIB_API lua_Number luaL_optnumber (lua_State *L, int arg, lua_Number def) {
 
 static void interror (lua_State *L, int arg) {
   if (lua_isnumber(L, arg))
-    luaL_argerror(L, arg, "number has no integer representation");
+    luaL_argerror(L, arg, "lasku dekinai jeste lakxel");
   else
     tag_error(L, arg, LUA_TNUMBER);
 }
@@ -889,7 +889,7 @@ LUALIB_API lua_Integer luaL_len (lua_State *L, int idx) {
   lua_len(L, idx);
   l = lua_tointegerx(L, -1, &isnum);
   if (l_unlikely(!isnum))
-    luaL_error(L, "object length is not an integer");
+    luaL_error(L, "atai esnai lakxel");
   lua_pop(L, 1);  /* remove object */
   return l;
 }
