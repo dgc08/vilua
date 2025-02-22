@@ -497,7 +497,7 @@ static const char *basicgetobjname (const Proto *p, int *ppc, int reg,
   int pc = *ppc;
   *name = luaF_getlocalname(p, reg + 1, pc);
   if (*name)  /* is a local? */
-    return "herting";
+    return "herka";
   /* else try symbolic execution */
   *ppc = pc = findsetreg(p, pc, reg);
   if (pc != -1) {  /* could find instruction? */
@@ -556,7 +556,7 @@ static const char *isEnv (const Proto *p, int pc, Instruction i, int isup) {
     name = upvalname(p, t);
   else  /* 't' is a register */
     basicgetobjname(p, &pc, t, &name);
-  return (name && strcmp(name, LUA_ENV) == 0) ? "global" : "field";
+  return (name && strcmp(name, LUA_ENV) == 0) ? "alplaska" : "field";
 }
 
 
@@ -742,7 +742,7 @@ static const char *varinfo (lua_State *L, const TValue *o) {
 static l_noret typeerror (lua_State *L, const TValue *o, const char *op,
                           const char *extra) {
   const char *t = luaT_objtypename(L, o);
-  luaG_runerror(L, "attempt to %s a %s value%s", op, t, extra);
+  luaG_runerror(L, "iskat na %s %s %s", op, t, extra);
 }
 
 
@@ -804,9 +804,9 @@ l_noret luaG_ordererror (lua_State *L, const TValue *p1, const TValue *p2) {
   const char *t1 = luaT_objtypename(L, p1);
   const char *t2 = luaT_objtypename(L, p2);
   if (strcmp(t1, t2) == 0)
-    luaG_runerror(L, "attempt to compare two %s values", t1);
+    luaG_runerror(L, "iskat na compare two %s values", t1);
   else
-    luaG_runerror(L, "attempt to compare %s with %s", t1, t2);
+    luaG_runerror(L, "iskat na compare %s with %s", t1, t2);
 }
 
 

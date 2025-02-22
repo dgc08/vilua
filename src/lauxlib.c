@@ -176,7 +176,7 @@ LUALIB_API void luaL_traceback (lua_State *L, lua_State *L1,
 LUALIB_API int luaL_argerror (lua_State *L, int arg, const char *extramsg) {
   lua_Debug ar;
   if (!lua_getstack(L, 0, &ar))  /* no stack frame? */
-    return luaL_error(L, "warui argument #%d (%s)", arg, extramsg);
+    return luaL_error(L, "warui antaka %ds (%s)", arg, extramsg);
   lua_getinfo(L, "n", &ar);
   if (strcmp(ar.namewhat, "method") == 0) {
     arg--;  /* do not count 'self' */
@@ -186,7 +186,7 @@ LUALIB_API int luaL_argerror (lua_State *L, int arg, const char *extramsg) {
   }
   if (ar.name == NULL)
     ar.name = (pushglobalfuncname(L, &ar)) ? lua_tostring(L, -1) : "?";
-  return luaL_error(L, "warui argument #%d to '%s' (%s)",
+  return luaL_error(L, "warui antaka %ds per '%s' (%s)",
                         arg, ar.name, extramsg);
 }
 

@@ -1,17 +1,55 @@
-dwaibma f(x,y)
-   z = x+y
-   anta z
+-- --compatability
+
+-- iskat = iskat os assert
+-- lakpari = lakpari os ipairs
+-- pari = pari os pairs
+-- bruk = bruk os pcall
+-- zehanu = zehanu os print
+-- atai = atai os rawlen
+-- adlasku = adlasku os tonumber
+-- adfras = adfras os tostring
+-- fal = fal os type
+
+
+zehanu("jaa " .. "aldzin" .. " au velt")
+
+Krais = {meta={}}
+Krais.__index = Krais
+
+setmetatable(Krais, Krais.meta)
+
+zehanu(Krais)
+
+dwaibma Krais.meta:__call(r)
+   o = {}
+   setmetatable(o, Krais)
+   o.r = r
+   zehanu("sada", r)
+   anta o
 owr
 
-lak1 = 35
-lak2 = 34
-zehanu(f(lak1,lak2))
+dwaibma Krais:xaxa ()
+   zehanu("hahhahahsha", sebja.r)
+owr
 
-x=0
-gensuru
-   zehanu("gen")
-   x=x+1
-made x==10
+Fras = {}
+
+k = Krais(13)
+k:xaxa()
+-- dwaibma f(x,y)
+--    z = x+y
+--    anta z
+-- owr
+
+-- lak1 = 35
+-- lak2 = 34
+-- zehanu(f(lak1,lak2))
+
+-- x=0
+-- gensuru
+--    zehanu("gen")
+--    x=x+1
+-- made x==10
 
 -- fras = {}
 
@@ -26,7 +64,7 @@ made x==10
 -- zehanu (_VERSION)
 
 -- suru
---    herting y = 1
+--    herka y = 1
 --    zehanu(y)
 --    x = {0,1,2,3,4}
 -- owr
@@ -63,6 +101,6 @@ made x==10
 
 -- -- per x=1,5 suru ::redo::
 -- --   zehanu(x .. ' + 1 = ?')
--- --   herting y = adlaksu(io.read'*l')
+-- --   herka y = adlaksu(io.read'*l')
 -- --   li y ~= x + 1 sit skoi redo owr
 -- -- owr

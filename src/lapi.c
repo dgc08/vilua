@@ -939,7 +939,7 @@ LUA_API int lua_setmetatable (lua_State *L, int objindex) {
   if (ttisnil(s2v(L->top.p - 1)))
     mt = NULL;
   else {
-    api_check(L, ttistable(s2v(L->top.p - 1)), "table expected");
+    api_check(L, ttistable(s2v(L->top.p - 1)), "treng tumam");
     mt = hvalue(s2v(L->top.p - 1));
   }
   switch (ttype(obj)) {

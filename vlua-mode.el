@@ -499,7 +499,7 @@ traceback location."
             "getmetatable" "lakpari" "load" "loadfile" "loadstring" "module"
             "next" "pari" "pcall" "zehanu" "rawequal" "rawget" "rawlen" "rawset"
             "require" "select" "setfenv" "setmetatable" "tonumber" "tostring"
-            "fal" "unpack" "xpcall" "self"
+            "fal" "unpack" "xpcall" "sebja"
             ("bit32" . ("arshift" "band" "bnot" "bor" "btest" "bxor" "extract"
                         "lrotate" "lshift" "replace" "rrotate" "rshift"))
             ("coroutine" . ("create" "isyieldable" "resume" "running" "status"

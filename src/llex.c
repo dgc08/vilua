@@ -40,7 +40,7 @@
 static const char *const luaX_tokens [] = {
     "au", "break", "suru", "andr", "andrli",
     "owr", "uso", "per", "dwaibma", "skoi", "li",
-    "in", "herting", "nil", "nai", "os", "gensuru",
+    "in", "herka", "nil", "nai", "os", "gensuru",
     "anta", "sit", "pravda", "made", "while",
     "//", "..", "...", "==", ">=", "<=", "~=",
     "<<", ">>", "::", "<eof>",
@@ -111,7 +111,7 @@ static const char *txtToken (LexState *ls, int token) {
 static l_noret lexerror (LexState *ls, const char *msg, int token) {
   msg = luaG_addinfo(ls->L, msg, ls->source, ls->linenumber);
   if (token)
-    luaO_pushfstring(ls->L, "%s near %s", msg, txtToken(ls, token));
+    luaO_pushfstring(ls->L, "%s akote %s", msg, txtToken(ls, token));
   luaD_throw(ls->L, LUA_ERRSYNTAX);
 }
 

@@ -299,7 +299,7 @@ static void check_readonly (LexState *ls, expdesc *e) {
   }
   if (varname) {
     const char *msg = luaO_pushfstring(ls->L,
-       "attempt to assign to const variable '%s'", getstr(varname));
+       "iskat na assign to const variable '%s'", getstr(varname));
     luaK_semerror(ls, msg);  /* error */
   }
 }
@@ -996,7 +996,7 @@ static void body (LexState *ls, expdesc *e, int ismethod, int line) {
   open_func(ls, &new_fs, &bl);
   checknext(ls, '(');
   if (ismethod) {
-    new_localvarliteral(ls, "self");  /* create 'self' parameter */
+    new_localvarliteral(ls, "sebja");  /* create 'self' parameter */
     adjustlocalvars(ls, 1);
   }
   parlist(ls);
@@ -1094,7 +1094,7 @@ static void primaryexp (LexState *ls, expdesc *v) {
       return;
     }
     default: {
-      luaX_syntaxerror(ls, "unexpected symbol");
+      luaX_syntaxerror(ls, "warui kiran");
     }
   }
 }
